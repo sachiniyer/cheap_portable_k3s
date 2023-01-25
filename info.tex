@@ -1,0 +1,20 @@
+\documentclass[12pt]{article}
+
+\begin{document}
+\section{Hardware}
+\subsection{Compute}
+One of the biggest priorities of this project was to reduce the cost of physical hardware. The cheapest way to do this was to buy used thinkpads (to which I am preferential anyway). Two of the secondary nodes are used thinkpad T410s and the master node is a cheap fanless computer. I decided to go with a new fanless computer for the master node to increase reliability a bit more. The thinkpads fail often, and I want to increase reliability by one metric.
+
+These thinkpads have been semi-reliable for the last year during the formation of this cluster. I highly recommend them in your projects. You can also look into removing the Intel ME as well as installing coreboot if you have a computer that is old enough. You can also go as far as removing the display with little issues (I did not do this however, as I prefer to keep the display for debugging).
+
+\subsection{Storage}
+I removed all the hdds that the nodes had as I understandably did not want to deal with spinning disks. In it's place, I have installed ssds for both the boot and storage drive of all the nodes. I do this more for reliability than speed.
+
+\section{Networking}
+\subsection{Tailscale}
+This is the barebones of the project. One of the biggest restrictions that I had when creating this cluster is that I can't use port forwarding in apartment currently. This meant that I needed another way to expose my cluster to the public internet. There are a ton of ways to do this. One such way is to use ngok or something similar. However, I realized quite quickly that Tailscale could also afford me some privacy measures in addition to allowing me to expose traffic to the public internet.
+
+
+
+
+\end{document}
