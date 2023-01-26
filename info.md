@@ -97,3 +97,14 @@ of webhook solution), but this is what I ended up with. In addition, I
 would avoid keeping your nodes in restrictive networks, as this means
 that they use the Relay servers as little as possible and you have
 faster speeds.
+
+## Klipper
+
+This is somewhat standard, but I use klipper (or servicelb) as the bare
+metal load balancer for this project. This sits on the tailscale
+magicDNS and works perfectly to distribute traffic accross the nodes. I
+also have multiple targets in the nginx config so that traffic is
+somewhat balanced from there as well. If one machine goes down,
+theoretically traffic should be forwarded to the node that is up and
+everything should proceed as normal (this has happened once - and to my
+surprise everything worked as expected).
