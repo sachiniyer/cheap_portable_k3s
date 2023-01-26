@@ -1,3 +1,12 @@
+# Overview
+
+This is the description of how I created my k3s cluster with tailscale
+and old thinkpads. I believe that the architecture is somewhat unique,
+and fits the use case of broke college kid trying to deal with no public
+ips and moving all the time. These docs are currently a work in
+progress, and contain a lot of my musings on the trials and tribulations
+taken when building this cluster.
+
 # Hardware
 
 ## Compute

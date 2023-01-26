@@ -1,6 +1,9 @@
 \documentclass[12pt]{article}
 \usepackage{indentfirst}
 \begin{document}
+\section{Overview}
+This is the description of how I created my k3s cluster with tailscale and old thinkpads. I believe that the architecture is somewhat unique, and fits the use case of broke college kid trying to deal with no public ips and moving all the time. These docs are currently a work in progress, and contain a lot of my musings on the trials and tribulations taken when building this cluster.
+
 \section{Hardware}
 \subsection{Compute}
 One of the biggest priorities of this project was to reduce the cost of physical hardware. The cheapest way to do this was to buy used thinkpads (to which I am preferential anyway). Two of the secondary nodes are used thinkpad T410s and the master node is a cheap fanless computer. I decided to go with a new fanless computer for the master node to increase reliability a bit more. The thinkpads fail often, and I want to increase reliability by one metric.
