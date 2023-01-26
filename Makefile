@@ -10,12 +10,10 @@ build:
 	@pandoc info.tex -o info.md > /dev/null
 clean:
 	@echo "Cleaning files"
-	@rm resume.aux resume.log resume.out resume.pdf > /dev/null
-	@rm resume-gpa.aux resume-gpa.log resume-gpa.out resume-gpa.pdf resume-gpa.tex > /dev/null
+	@rm info.aux info.log info.out info.pdf info.md > /dev/null
 clean-no-pdf:
-	@echo "Cleaning files (except pdfs)"
-	@rm resume.aux resume.log resume.out > /dev/null
-	@rm resume-gpa.aux resume-gpa.log resume-gpa.out resume-gpa.tex > /dev/null
+	@echo "Cleaning files (except pdfs/mds)"
+	@rm info.aux info.log info.out > /dev/null
 
 
 
