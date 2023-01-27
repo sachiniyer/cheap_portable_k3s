@@ -36,6 +36,20 @@ The previous version of this cluster used to be accessible by ssh with a
 cluster slightly more secure and control the traffic that hits the
 cluster better.
 
+## Open Source Friendly
+
+I wanted to try to use open source software for pretty much everything
+(down to the bios). This was because I wanted to not only support open
+source projects, but see if I could really run this without having to
+rely on any proprietary software.
+
+## Resiliency
+
+Ideally I wanted to design something that had non-resilient cheap
+hardware and a very resilient architecture. I wanted to make sure that
+the cluster would have a much higher uptime than would be expected of
+it.
+
 ## k3s
 
 I really wanted to make a kubernetes cluster not just to learn, but
@@ -118,7 +132,8 @@ level. Tailscale handles the key orchestration for wireguard. The end
 result of this is a p2p connection with every other machine in the
 "Tailnet". Using some fancy port opening stuff, you can also expand your
 wireguard tunnel through NATs and essentially communicate with every
-other machine no matter where you are.
+other machine no matter where you are. Each machine gets a Tailscale IP
+as well as a MagicDNS (an entry in resolv.conf basically).
 
 #### Why Tailscale
 
@@ -216,13 +231,123 @@ There may be a better way to do this with webhooks. I would also avoid
 keeping your nodes in restrictive networks, as this means that they use
 the relay servers as little as possible and you have faster speeds.
 
-## Klipper
+## Klipper (or ServiceLB)
 
-This is somewhat standard, but I use klipper (or servicelb) as the bare
-metal load balancer for this project. This sits on the tailscale
-magicDNS and works perfectly to distribute traffic accross the nodes. I
-also have multiple targets in the nginx config so that traffic is
-somewhat balanced from there as well. If one machine goes down,
-theoretically traffic should be forwarded to the node that is up and
-everything should proceed as normal (this has happened once - and to my
-surprise everything worked as expected).
+Load balancing is very cool. All load balancing communication happens
+through Tailscale MagicDNS. I used to use MetalLB instead of the k3s
+default of klipper. However, Metallb would often overwrite my
+proxy_protocol packets, not allowing me to do TLS termination on the
+cluster. I was actually able to get Klipper working with a lot of ease.
+I am considering switching to cilium because it has a much more
+interesting design pattern (eBPF-based load balancing).
+
+## Traefik Ingress
+
+I made a similar switch from Nginx to Traefik for the same
+proxy_protocol reasoning. the Nginx ingress was not respecting my
+proxy_protocol packets, and somehow the Traefik ingress was really easy
+to configure and get working. I also started to like traefik a lot more
+because it seems to play better with the more modern versions of
+kubernetes ($\ge$ 1.25).
+
+## Cert Manager
+
+In the previous iteration of this cluster, I fell in love with
+cert-manager. I desperately wanted to use it again. This was one of the
+main reasons for doing TLS termination on the cluster instead of the
+entrance nodes (and also that wildcard certificates are a bit insecure).
+I integrated cert-manager with Traefik and it works quite well. I love
+being able to spin up a cert easily and have ssl easily enabled.
+
+# Storage
+
+I don't do anything to crazy here. The most important thing is being
+able to do good backups to the cluster.
+
+## Rook Ceph
+
+I read quite a bit on ceph when I was interesting in storage managers,
+and quickly fell in love. I also really love rook-toolbox and overall I
+think that rook is just an excellent storage manager.
+
+## Why not longhorn
+
+I didn't choose the rancher suggested longhorn, because ceph is a bit
+more resilient. I also want in the future to get more into the weeds
+with my storage manager configuration and longhorn does not allow me to
+do that effectively.
+
+# Applications
+
+I have a ton of applications that I want to deploy. This is a select
+few. Some of them are already deployed, some of them are in the process
+of being deployed.
+
+1.  [My website](https://sachiniyer.com) - This is my personal website
+
+2.  Random Projects (e.g.
+    [control-display](https://school-demo.sachiniyer.com)) - I make
+    random projects all the time, and now I can deploy with ease
+    (without AWS)
+
+3.  [Nextcloud](https://nextcloud.com) - This is basically my self
+    hosted google drive
+
+4.  [Syncthing](https://syncthing.net) - How I plan to backup my
+    computer
+
+5.  [Shlink](https://shlink.io) - A basic self-hosted url shortner
+
+6.  [Gitea](https://gitea.io) - My git hosting solution that looks
+    pretty
+
+7.  Password-Management ([Keepass](https://keepassxc.org) vs
+    [VaultWarden](https://github.com/dani-garcia/vaultwarden)) - I am
+    still trying to decide how I want to do password management (I want
+    to use hardware keys)
+
+8.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html) -
+    For all the ML stuff I am trying to learn
+
+9.  [Container Registry](https://docs.docker.com/registry/) - How I want
+    to host my own docker images from now on
+
+# Future Goals
+
+## ec2 autoscaling
+
+I want to integrate autoscaling with ec2 instances for when I am really
+out of compute on the cluster. This is going to take a lot of work
+however, because I will need to figure out a way to automate the
+addition of a node to the Tailnet, as well as figure out how to automate
+the addition of a node the k3s cluster. These are both very possible,
+but a little bit hard to do super securely.
+
+## Move entrance node
+
+I want to move the entrance node off of the ec2 instance into another
+node that has a public IP. I think that this is a little better cost
+wise, and means I am fully not dependent on AWS. I will need a public IP
+for this to work however.
+
+## Add two more nodes
+
+I quickly reach the maximum limits of this cluster, and I think that it
+would be prudent to start planning for the addition of two more nodes. I
+am weighing whether to get another 2 T410s or to actually add some more
+powerful compute.
+
+## Better Storage
+
+I think it will be nice to add some better storage to this system. The
+current storage capabilities are alright, but it would be nice to do
+intermittent backups to the cloud as well as potentially add even more
+capacity. SSDs do not cost much these days.
+
+## Integrate Wireguard Key Management into k3s
+
+Lastly, the by far most ambitious improvement would be to move the
+headscale control server functionality into k3s and handle it natively.
+This would require a lot more work and system design, but I think it
+could be interesting to actually make wireguard tunnels through k3s
+native system design. I will have to think a lot more about this though.

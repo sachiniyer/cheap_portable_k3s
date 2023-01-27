@@ -6,7 +6,7 @@
 -include .gpa
 build:
 	@echo "Making PDF"
-	@pdflatex README.tex > /dev/null
+	@pdflatex -halt-on-error README.tex > /dev/null
 	@pandoc -s README.tex -o README.md > /dev/null
 clean:
 	@echo "Cleaning files"
