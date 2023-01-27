@@ -7,7 +7,7 @@
 build:
 	@echo "Making PDF"
 	@pdflatex README.tex > /dev/null
-	@pandoc README.tex -o README.md > /dev/null
+	@pandoc -s README.tex -o README.md > /dev/null
 clean:
 	@echo "Cleaning files"
 	@rm README.aux README.log README.out README.pdf README.md > /dev/null
