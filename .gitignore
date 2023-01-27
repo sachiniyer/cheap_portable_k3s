@@ -2,5 +2,6 @@
 .idea
 *.log
 *.aux
+*.out
 tmp/
 .auctex-auto
