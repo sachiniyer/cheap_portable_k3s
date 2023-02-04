@@ -1,0 +1,9 @@
+[Unit]
+Description=nginx-sync timer
+
+[Timer]
+OnUnitActiveSec=5min
+OnBootSec=5min
+
+[Install]
+WantedBy=timers.target

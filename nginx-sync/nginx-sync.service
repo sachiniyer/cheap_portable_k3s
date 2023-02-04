@@ -1,0 +1,7 @@
+[Unit]
+Description=test job
+
+[Service]
+User=root
+Type=oneshot
+ExecStart=/bin/bash /usr/local/sbin/nginx-sync.sh
