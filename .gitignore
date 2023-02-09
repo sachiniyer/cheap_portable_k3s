@@ -3,5 +3,6 @@
 *.log
 *.aux
 *.out
+.sync
 tmp/
 .auctex-auto
