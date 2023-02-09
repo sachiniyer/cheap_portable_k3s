@@ -2,6 +2,7 @@
 \usepackage{indentfirst}
 \usepackage{bookmark}
 \usepackage{hyperref}
+\usepackage[normalem]{ulem}
 \hypersetup{
   colorlinks   = true,    % Colours links instead of ugly boxes
   urlcolor     = blue,    % Colour for external hyperlinks
@@ -141,6 +142,6 @@ I quickly reach the maximum limits of this cluster, and I think that it would be
 I think it will be nice to add some better storage to this system. The current storage capabilities are alright, but it would be nice to do intermittent backups to the cloud as well as potentially add even more capacity. SSDs do not cost much these days.
 
 \subsection{Integrate Wireguard Key Management into k3s}
-Lastly, the by far most ambitious improvement would be to move the headscale control server functionality into k3s and handle it natively. This would require a lot more work and system design, but I think it could be interesting to actually make wireguard tunnels through k3s native system design. I will have to think a lot more about this though.
+\sout{Lastly, the by far most ambitious improvement would be to move the headscale control server functionality into k3s and handle it natively. This would require a lot more work and system design, but I think it could be interesting to actually make wireguard tunnels through k3s native system design. I will have to think a lot more about this though.} - \emph{UPDATE} seems to be \href{https://www.netmaker.org/blog/deploy-distributed-kubernetes-clusters-with-wireguard-and-netmaker}{done}
 
 \end{document}

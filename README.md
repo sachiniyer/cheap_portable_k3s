@@ -1,7 +1,7 @@
 ---
 author:
 - Sachin Iyer
-date: 2023-01-27
+date: 2023-02-09
 title: Cheap Portable k3s
 ---
 
@@ -9,7 +9,7 @@ title: Cheap Portable k3s
 
 This is the description of how I created my k3s cluster with tailscale
 and old thinkpads. I believe that the architecture is somewhat unique,
-and fits the use case of broke college kid trying to deal with no public
+and fits the use case of cheap college kid trying to deal with no public
 ips and moving all the time. These docs are currently a work in
 progress, and contain a lot of my musings on the trials and tribulations
 taken when building this cluster.
@@ -283,7 +283,8 @@ I have a ton of applications that I want to deploy. This is a select
 few. Some of them are already deployed, some of them are in the process
 of being deployed.
 
-1.  [My website](https://sachiniyer.com) - This is my personal website
+1.  [My website](https://sachiniyer.com) - This is my personal website -
+    <https://sachiniyer.com>
 
 2.  Random Projects (e.g.
     [control-display](https://school-demo.sachiniyer.com)) - I make
@@ -291,26 +292,27 @@ of being deployed.
     (without AWS)
 
 3.  [Nextcloud](https://nextcloud.com) - This is basically my self
-    hosted google drive
+    hosted google drive - <https://store.sachiniyer.com>
 
-4.  [Syncthing](https://syncthing.net) - How I plan to backup my
-    computer
+4.  [Resilio Sync](https://resilio.com) - How I plan to backup my
+    computer (uses the bit-torrent protocol) -
+    https://sync.sachiniyer.com
 
-5.  [Shlink](https://shlink.io) - A basic self-hosted url shortner
+5.  [Gitea](https://gitea.io) - My git hosting solution that looks
+    pretty - <https://git.sachiniyer.com>
 
-6.  [Gitea](https://gitea.io) - My git hosting solution that looks
-    pretty
-
-7.  Password-Management ([Keepass](https://keepassxc.org) vs
-    [VaultWarden](https://github.com/dani-garcia/vaultwarden)) - I am
+6.  [VaultWarden](https://github.com/dani-garcia/vaultwarden)) - I am
     still trying to decide how I want to do password management (I want
-    to use hardware keys)
+    to use hardware keys) - <https://pass.sachiniyer.com> (but you can't
+    access this probably - at least after I finish deploying stuff)
 
-8.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html) -
-    For all the ML stuff I am trying to learn
+7.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html) -
+    For all the ML stuff I am trying to learn -
+    <https://hub.sachiniyer.com>
 
-9.  [Container Registry](https://docs.docker.com/registry/) - How I want
-    to host my own docker images from now on
+8.  [Container Registry](https://docs.docker.com/registry/) - How I want
+    to host my own docker images from now on -
+    https://registry.sachiniyer.com
 
 # Future Goals
 
@@ -346,8 +348,10 @@ capacity. SSDs do not cost much these days.
 
 ## Integrate Wireguard Key Management into k3s
 
-Lastly, the by far most ambitious improvement would be to move the
+~~Lastly, the by far most ambitious improvement would be to move the
 headscale control server functionality into k3s and handle it natively.
 This would require a lot more work and system design, but I think it
 could be interesting to actually make wireguard tunnels through k3s
-native system design. I will have to think a lot more about this though.
+native system design. I will have to think a lot more about this
+though.~~ - *UPDATE* seems to be
+[done](https://www.netmaker.org/blog/deploy-distributed-kubernetes-clusters-with-wireguard-and-netmaker)
