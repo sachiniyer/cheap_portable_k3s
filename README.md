@@ -1,7 +1,7 @@
 ---
 author:
 - Sachin Iyer
-date: 2023-02-09
+date: 2023-02-23
 title: Cheap Portable k3s
 ---
 
@@ -296,23 +296,23 @@ of being deployed.
 
 4.  [Resilio Sync](https://resilio.com) - How I plan to backup my
     computer (uses the bit-torrent protocol) -
-    https://sync.sachiniyer.com
+    https://sync.sachiniyer.com (or I will use rsync from a container to
+    back up to a pvc - it is inside the tailscale network and I can just
+    ssh into my computer, with a private key in a kuberentes secret)
 
 5.  [Gitea](https://gitea.io) - My git hosting solution that looks
     pretty - <https://git.sachiniyer.com>
 
 6.  [VaultWarden](https://github.com/dani-garcia/vaultwarden)) - I am
     still trying to decide how I want to do password management (I want
-    to use hardware keys) - <https://pass.sachiniyer.com> (but you can't
-    access this probably - at least after I finish deploying stuff)
+    to use hardware keys) - <https://pass.sachiniyer.com>
 
 7.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html) -
     For all the ML stuff I am trying to learn -
     <https://hub.sachiniyer.com>
 
-8.  [Container Registry](https://docs.docker.com/registry/) - How I want
-    to host my own docker images from now on -
-    https://registry.sachiniyer.com
+8.  [Dav Server](https://sabre.io/baikal/) - How I sync my tasks and
+    calendar, and files. - <https://dav.sachiniyer.com>
 
 # Future Goals
 
