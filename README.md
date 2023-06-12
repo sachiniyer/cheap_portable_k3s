@@ -1,10 +1,3 @@
----
-author:
-- Sachin Iyer
-date: 2023-02-23
-title: Cheap Portable k3s
----
-
 # Overview
 
 This is the description of how I created my k3s cluster with tailscale
@@ -294,25 +287,19 @@ of being deployed.
 3.  [Nextcloud](https://nextcloud.com) - This is basically my self
     hosted google drive - <https://store.sachiniyer.com>
 
-4.  [Resilio Sync](https://resilio.com) - How I plan to backup my
-    computer (uses the bit-torrent protocol) -
-    https://sync.sachiniyer.com (or I will use rsync from a container to
-    back up to a pvc - it is inside the tailscale network and I can just
-    ssh into my computer, with a private key in a kuberentes secret)
-
-5.  [Gitea](https://gitea.io) - My git hosting solution that looks
+4.  [Gitea](https://gitea.io) - My git hosting solution that looks
     pretty - <https://git.sachiniyer.com>
 
-6.  [VaultWarden](https://github.com/dani-garcia/vaultwarden)) - I am
-    still trying to decide how I want to do password management (I want
-    to use hardware keys) - <https://pass.sachiniyer.com>
+5.  [VaultWarden](https://github.com/dani-garcia/vaultwarden) (private)
+    -- With a hardware key is how I store all my passwords.
+    <https://pass.sachiniyer.com>
 
-7.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html) -
-    For all the ML stuff I am trying to learn -
+6.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
+    (private) - For all the ML stuff I am trying to learn -
     <https://hub.sachiniyer.com>
 
-8.  [Dav Server](https://sabre.io/baikal/) - How I sync my tasks and
-    calendar, and files. - <https://dav.sachiniyer.com>
+7.  [Dav Server](https://sabre.io/baikal/) (private) - How I sync my
+    tasks and calendar, and files. - <https://dav.sachiniyer.com>
 
 # Future Goals
 
