@@ -10,17 +10,16 @@ taken when building this cluster.
 ## Cheap
 
 I needed this cluster to be somewhat cheap for two reasons. First, I
-don't have any high sla requirements, nor do I really care too much
-about performance (gives me more time to stop and touch grass). As such,
-it is better for me to try and create something that optimizes for
-price.
+don't have any super high SLA requirements, nor do I really care too
+much about performance. As such, it is better for me to try and create
+something that optimizes for price.
 
 ## Portable
 
-In my youth, I tend to move around quite a bit, and it is an absolute
-pain to set up port forwarding everywhere that I go. I also am not
-guaranteed access to a public IP wherever I am going. Therefore it is
-necessary that I am able to move my cluster with ease.
+I tend to move around quite a bit, and it is an absolute pain to set up
+port forwarding everywhere that I go. I also am not guaranteed access to
+a public IP wherever I am going. Therefore it is necessary that I am
+able to move my cluster with ease.
 
 ## Secure
 
@@ -29,7 +28,7 @@ The previous version of this cluster used to be accessible by ssh with a
 cluster slightly more secure and control the traffic that hits the
 cluster better.
 
-## Open Source Friendly
+## Based in Open Source
 
 I wanted to try to use open source software for pretty much everything
 (down to the bios). This was because I wanted to not only support open
@@ -49,14 +48,70 @@ I really wanted to make a kubernetes cluster not just to learn, but
 because it allows me to deploy all of my apps with ease. I also get to
 keep my data on my machines and overall just have a testing ground for
 all of my stuff that I do. If I want something to go up, I am not at the
-mercy of my current employers cloud service.
+mercy of a cloud service.
+
+# Applications
+
+These are the applications that are currently deployed.
+
+1.  [My website](https://sachiniyer.com) - This is my personal website -
+    <https://sachiniyer.com>
+
+2.  Random Projects (e.g.
+    [control-display](https://school-demo.sachiniyer.com) or [my toxic
+    tweets project](https://ai.sachiniyer.com)) - I can deploy my random
+    projects with ease now
+
+3.  [Hugo blog](https://gohugo.io/) - This is my blog that I write posts
+    (mostly to myself) on - <https://blog.sachiniyer.com>
+
+4.  [Emptypad](https://github.com/aminoa/emptypad) - a scratchpad that I
+    can use on the web (built by \@aminoa)
+    <https://emptypad.sachiniyer.com>
+
+5.  [Privatebin](https://privatebin.info/) - Basically PasteBin, but I
+    want to control my data, and I don't want it to be indexable.
+    <https://bin.sachiniyer.com>
+
+6.  [Kutt](https://kutt.it/) - Basically bitly, but, again, I want to
+    control my data, and I don't want another company taking it.
+    <https://s.sachiniyer.com>
+
+7.  [Nextcloud](https://nextcloud.com) - This is basically my self
+    hosted google drive - <https://store.sachiniyer.com>
+
+8.  [Gitea](https://gitea.io) - My git hosting solution that looks
+    pretty - <https://git.sachiniyer.com>
+
+9.  [VaultWarden](https://github.com/dani-garcia/vaultwarden) (private)
+    -- With a hardware key is how I store all my passwords.
+    <https://pass.sachiniyer.com>
+
+10. [nfty](https://docs.ntfy.sh/) (private) -- Basically a way to
+    automate notifications to my phone for downtime and anything else I
+    need to remind myself about <https://nfty.sachiniyer.com>
+
+11. [prometheus](https://prometheus.io/) (private) -- How I get metrics
+    about the cluster and anything else.
+    <https://metrics.sachiniyer.com>
+
+12. [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
+    (private) - For all the ML stuff I am trying to learn -
+    <https://hub.sachiniyer.com>
+
+13. [Dav Server](https://sabre.io/baikal/) (private) - How I sync my
+    tasks and calendar, and files. - <https://dav.sachiniyer.com>
+
+14. [Minecraft Server](https://sabre.io/baikal/) (private) - Minecraft
+    server, because my friends wanted to play (I'm really bad) -
+    <https://sachiniyer.com:25565>
 
 # Hardware
 
 There are two thinkpads and one fanless computer in my 3 node k3s
-cluster. I also have an ec2 instance that acts as my "entrance node"'
-and also [headscale control server](#sec:Headscale). I don't include
-this in the cluster, because I want an odd number of nodes.
+cluster. I also have an ec2 instance that acts as my "entrance node" and
+also [headscale control server](#sec:Headscale). I don't include this in
+the cluster, because I want an odd number of nodes.
 
 ## Compute
 
@@ -66,19 +121,21 @@ seem like much, but I paid \$250 in total.
 #### Thinkpads
 
 The cheapest way to get cores is to buy used thinkpads (to which I am
-preferential anyway). The two secondary nodes are thinkpad T410s. These
-thinkpads have been semi-reliable for the last year during the formation
-of this cluster. You can also look into removing the Intel ME as well as
-installing coreboot if you have a computer that is old enough (the T410s
-are). The computer will also boot if you short two of the pins in the
-eDP ribbon connector (which means you can remove the display).
+preferential anyway). The two secondary nodes are a thinkpad T410 and a
+thinkpad T420. These thinkpads have been semi-reliable for the last year
+during the formation of this cluster. You can also look into removing
+the Intel ME as well as installing coreboot if you have a computer that
+is old enough (the T410s are). The computer will also boot if you short
+two of the pins in the eDP ribbon connector (which means you can remove
+the display).
 
 #### Fanless Computer from China
 
 The master node is a cheap fanless computer. I decided to go with a new
 fanless computer for the master node to increase reliability a bit more.
 It is also because there were no T410s on new york craigslist when I was
-expanding to my last node
+expanding to my last node. **Don't buy the AWOW Mini PC - AK41. It is
+super unreliable and sucks**.
 
 #### Why no raspberry pi
 
@@ -178,11 +235,13 @@ connected to the network through this entrance node, such as my
 
 This is the tailscale term for machines that advertise themselves as
 being able to forward your traffic through them. I actually use [a
-rapsberry pi](https://playground.sachiniyer.com) for this purpose. I
+rapsberry pi](https://playground.sachiniyer.com) for this purpose. ~~I
 also connect that raspberry pi to my preferred VPN, so that anytime I
 want a VPN connection, I don't have to use an external application. I
 can also add a VPN connection very quickly to any node just by
-configuring it to use the exit node.
+configuring it to use the exit node.~~ I put VPNs on the cluster itself
+so it is a lot easier to choose which ones I want. I also am considering
+putting exit nodes directly on the cluster.
 
 #### TLS
 
@@ -224,22 +283,23 @@ There may be a better way to do this with webhooks. I would also avoid
 keeping your nodes in restrictive networks, as this means that they use
 the relay servers as little as possible and you have faster speeds.
 
-## Klipper (or ServiceLB)
+## ~~Klipper (or ServiceLB)~~ MetalLB
 
 Load balancing is very cool. All load balancing communication happens
-through Tailscale MagicDNS. I used to use MetalLB instead of the k3s
+through Tailscale MagicDNS. ~~I used to use MetalLB instead of the k3s
 default of klipper. However, Metallb would often overwrite my
 proxy_protocol packets, not allowing me to do TLS termination on the
-cluster. I was actually able to get Klipper working with a lot of ease.
-I am considering switching to cilium because it has a much more
-interesting design pattern (eBPF-based load balancing).
+cluster. I was actually able to get Klipper working with a lot of
+ease.~~ I figured out the proxy protocol issues and am back on MetaLB. I
+am considering a switch to cilium because it has a much more interesting
+design pattern (eBPF-based load balancing).
 
 ## Traefik Ingress
 
 I made a similar switch from Nginx to Traefik for the same
 proxy_protocol reasoning. the Nginx ingress was not respecting my
 proxy_protocol packets, and somehow the Traefik ingress was really easy
-to configure and get working. I also started to like traefik a lot more
+to configure and get working. I also started to like Traefik a lot more
 because it seems to play better with the more modern versions of
 kubernetes ($\ge$ 1.25).
 
@@ -270,65 +330,18 @@ more resilient. I also want in the future to get more into the weeds
 with my storage manager configuration and longhorn does not allow me to
 do that effectively.
 
-# Applications
-
-I have a ton of applications that I want to deploy. This is a select
-few. Some of them are already deployed, some of them are in the process
-of being deployed.
-
-1.  [My website](https://sachiniyer.com) - This is my personal website -
-    <https://sachiniyer.com>
-
-2.  Random Projects (e.g.
-    [control-display](https://school-demo.sachiniyer.com) or [my toxic
-    tweets project](https://ai.sachiniyer.com)) - I can deploy my random
-    projects with ease now
-
-3.  [Hugo blog](https://gohugo.io/) - This is my blog that I write posts
-    (mostly to myself) on - <https://blog.sachiniyer.com>
-
-4.  [Emptypad](https://github.com/aminoa/emptypad) - a scratchpad that I
-    can use on the web (built by \@aminoa)
-    <https://emptypad.sachiniyer.com>
-
-5.  [Privatebin](https://privatebin.info/) - Basically PasteBin, but I
-    want to control my data, and I don't want it to be indexable.
-    <https://bin.sachiniyer.com>
-
-6.  [Kutt](https://kutt.it/) - Basically bitly, but, again, I want to
-    control my data, and I don't want another company taking it.
-    <https://s.sachiniyer.com>
-
-7.  [Nextcloud](https://nextcloud.com) - This is basically my self
-    hosted google drive - <https://store.sachiniyer.com>
-
-8.  [Gitea](https://gitea.io) - My git hosting solution that looks
-    pretty - <https://git.sachiniyer.com>
-
-9.  [VaultWarden](https://github.com/dani-garcia/vaultwarden) (private)
-    -- With a hardware key is how I store all my passwords.
-    <https://pass.sachiniyer.com>
-
-10. [nfty](https://docs.ntfy.sh/) (private) -- Basically a way to
-    automate notifications to my phone for downtime and anything else I
-    need to remind myself about <https://nfty.sachiniyer.com>
-
-11. [prometheus](https://prometheus.io/) (private) -- How I get metrics
-    about the cluster and anything else.
-    <https://metrics.sachiniyer.com>
-
-12. [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
-    (private) - For all the ML stuff I am trying to learn -
-    <https://hub.sachiniyer.com>
-
-13. [Dav Server](https://sabre.io/baikal/) (private) - How I sync my
-    tasks and calendar, and files. - <https://dav.sachiniyer.com>
-
-14. [Minecraft Server](https://sabre.io/baikal/) (private) - Minecraft
-    server, because my friends wanted to play (I'm really bad) -
-    <https://sachiniyer.com:25565>
-
 # Future Goals
+
+## move master node
+
+The machine that the master node is on right now became unstable, so I
+need to figure out a way to migrate that over to something more stable.
+
+## more reliable Headscale
+
+Currently Headscale is deployed on bare metal which is okayish. However,
+I would much rather it be deployed in a docker container, or spun up
+with docker-compose or something with a bit more fault tolerance.
 
 ## ec2 autoscaling
 
@@ -349,9 +362,7 @@ for this to work however.
 ## Add two more nodes
 
 I quickly reach the maximum limits of this cluster, and I think that it
-would be prudent to start planning for the addition of two more nodes. I
-am weighing whether to get another 2 T410s or to actually add some more
-powerful compute.
+would be prudent to start planning for the addition of two more nodes
 
 ## Better Storage
 
@@ -369,3 +380,4 @@ could be interesting to actually make wireguard tunnels through k3s
 native system design. I will have to think a lot more about this
 though.~~ - *UPDATE* seems to be
 [done](https://www.netmaker.org/blog/deploy-distributed-kubernetes-clusters-with-wireguard-and-netmaker)
+by someone already.
