@@ -280,9 +280,9 @@ of being deployed.
     <https://sachiniyer.com>
 
 2.  Random Projects (e.g.
-    [control-display](https://school-demo.sachiniyer.com)) - I make
-    random projects all the time, and now I can deploy with ease
-    (without AWS)
+    [control-display](https://school-demo.sachiniyer.com) or [my toxic
+    tweets project](https://ai.sachiniyer.com)) - I can deploy my random
+    projects with ease now
 
 3.  [Hugo blog](https://gohugo.io/) - This is my blog that I write posts
     (mostly to myself) on - <https://blog.sachiniyer.com>
