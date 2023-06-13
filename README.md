@@ -284,22 +284,49 @@ of being deployed.
     random projects all the time, and now I can deploy with ease
     (without AWS)
 
-3.  [Nextcloud](https://nextcloud.com) - This is basically my self
+3.  [Hugo blog](https://gohugo.io/) - This is my blog that I write posts
+    (mostly to myself) on - <https://blog.sachiniyer.com>
+
+4.  [Emptypad](https://github.com/aminoa/emptypad) - a scratchpad that I
+    can use on the web (built by \@aminoa)
+    <https://emptypad.sachiniyer.com>
+
+5.  [Privatebin](https://privatebin.info/) - Basically PasteBin, but I
+    want to control my data, and I don't want it to be indexable.
+    <https://bin.sachiniyer.com>
+
+6.  [Kutt](https://kutt.it/) - Basically bitly, but, again, I want to
+    control my data, and I don't want another company taking it.
+    <https://s.sachiniyer.com>
+
+7.  [Nextcloud](https://nextcloud.com) - This is basically my self
     hosted google drive - <https://store.sachiniyer.com>
 
-4.  [Gitea](https://gitea.io) - My git hosting solution that looks
+8.  [Gitea](https://gitea.io) - My git hosting solution that looks
     pretty - <https://git.sachiniyer.com>
 
-5.  [VaultWarden](https://github.com/dani-garcia/vaultwarden) (private)
+9.  [VaultWarden](https://github.com/dani-garcia/vaultwarden) (private)
     -- With a hardware key is how I store all my passwords.
     <https://pass.sachiniyer.com>
 
-6.  [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
+10. [nfty](https://docs.ntfy.sh/) (private) -- Basically a way to
+    automate notifications to my phone for downtime and anything else I
+    need to remind myself about <https://nfty.sachiniyer.com>
+
+11. [prometheus](https://prometheus.io/) (private) -- How I get metrics
+    about the cluster and anything else.
+    <https://metrics.sachiniyer.com>
+
+12. [Jupyterhub](https://jupyterhub.readthedocs.io/en/stable/installation-guide.html)
     (private) - For all the ML stuff I am trying to learn -
     <https://hub.sachiniyer.com>
 
-7.  [Dav Server](https://sabre.io/baikal/) (private) - How I sync my
+13. [Dav Server](https://sabre.io/baikal/) (private) - How I sync my
     tasks and calendar, and files. - <https://dav.sachiniyer.com>
+
+14. [Minecraft Server](https://sabre.io/baikal/) (private) - Minecraft
+    server, because my friends wanted to play (I'm really bad) -
+    <https://sachiniyer.com:25565>
 
 # Future Goals
 
