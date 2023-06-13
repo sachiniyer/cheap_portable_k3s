@@ -13,7 +13,7 @@ clean:
 	@rm README.aux README.log README.out README.pdf README.md > /dev/null
 clean-no-pdf:
 	@echo "Cleaning files (except pdfs/mds)"
-	@rm README.aux README.log README.out > /dev/null
+	@rm README.aux README.log README.out texput.log > /dev/null
 
 
 
