@@ -1,3 +1,10 @@
+---
+author:
+- Sachin Iyer
+date: 2023-06-13
+title: Cheap Portable k3s
+---
+
 # Overview
 
 This is the description of how I created my k3s cluster with tailscale
