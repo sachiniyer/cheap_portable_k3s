@@ -1,7 +1,7 @@
 ---
 author:
 - Sachin Iyer
-date: 2023-06-13
+date: 2023-07-20
 title: Cheap Portable k3s
 ---
 
@@ -59,7 +59,9 @@ mercy of a cloud service.
 
 # Applications
 
-These are the applications that are currently deployed.
+These are the applications that are currently deployed.\
+There are configs in [another
+repo](https://github.com/sachiniyer/k3s-configs).
 
 1.  [My website](https://sachiniyer.com) - This is my personal website -
     <https://sachiniyer.com>
