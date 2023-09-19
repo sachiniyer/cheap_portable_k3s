@@ -6,3 +6,4 @@
 .sync
 tmp/
 .auctex-auto
+.env
