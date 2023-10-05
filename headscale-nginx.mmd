@@ -1,0 +1,37 @@
+C4Context
+   title Headscale Nginx Image
+   System_Boundary(m, "Machine") {
+      System_Boundary(v, "Volumes") {
+          System(VolumeA, "/var/lib/headscale", "Headscale config")
+          System(VolumeB, "/etc/headscale", "Headscale socket")
+          System(VolumeC, "/endpoints", "Domains and IP pairings")
+      }
+      System_Boundary(c, "Container Boundry") {
+          System(SystemA, "Headscale", "Headscale Control Server")
+          System(SystemC, "Headscale UI", "Headscale Interface")
+          System(SystemB, "Nginx", "Nginx Web Server")
+      }
+      System_Boundary(t, "Tailnet") {
+          System(TailA, "Cluster", "Machines in the cluster")
+          System(TailB, "Other", "Other machines in the tailnet")
+      }
+      System_Boundary(p, "Ports") {
+          System(PortA, "80", "HTTP")
+          System(PortB, "443", "HTTPS")
+      }
+   }
+   BiRel(VolumeA, SystemA, "RW")
+   BiRel(VolumeA, SystemC, "RW")
+   BiRel(VolumeB, SystemA, "RW")
+   Rel(VolumeC, SystemA, "R")
+   Rel(VolumeC, SystemB, "R")
+   Rel(VolumeC, SystemC, "R")
+
+   Rel(SystemA, SystemB, "Proxy")
+   Rel(SystemC, SystemB, "Proxy")
+
+   BiRel(SystemB, TailA, "Proxy")
+   BiRel(SystemB, TailB, "Proxy")
+
+   BiRel(SystemB, PortA, "Attach")
+   BiRel(SystemB, PortB, "Attach")
