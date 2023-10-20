@@ -117,34 +117,39 @@ repo](https://github.com/sachiniyer/k3s-configs).
 
 # Hardware
 
-There are two thinkpads and one fanless computer in my 3 node k3s
-cluster. I also have an ec2 instance that acts as my "entrance node" and
-also [headscale control server](#sec:Headscale). I don't include this in
-the cluster, because I want an odd number of nodes.
+There are two thinkpads and ~~one fanless computer~~ a framework in my 3
+node k3s cluster. I also have an ec2 instance that acts as my "entrance
+node" and also [headscale control server](#sec:Headscale). I don't
+include this in the cluster, because I want an odd number of nodes. In
+addition, it does not have much capacity.
 
 ## Compute
 
-I have a very powerful 12 virtualized cores in this cluster. It may not
-seem like much, but I paid \$250 in total.
+I have a very powerful 16 virtualized cores in this cluster. It may not
+seem like much, but I paid \$600 in total (a lot of this comes from the
+framework).
 
 #### Thinkpads
 
 The cheapest way to get cores is to buy used thinkpads (to which I am
-preferential anyway). The two secondary nodes are a thinkpad T410 and a
-thinkpad T420. These thinkpads have been semi-reliable for the last year
-during the formation of this cluster. You can also look into removing
-the Intel ME as well as installing coreboot if you have a computer that
-is old enough (the T410s are). The computer will also boot if you short
-two of the pins in the eDP ribbon connector (which means you can remove
-the display).
+preferential anyway). The four secondary nodes are a thinkpad T410,
+thinkpad T420 thinkpad T440, and thinkpad x220T. These thinkpads have
+been semi-reliable for the last year during the formation of this
+cluster. You can also look into removing the Intel ME as well as
+installing coreboot if you have a computer that is old enough (the T410s
+are). The computer will also boot if you short two of the pins in the
+eDP ribbon connector (which means you can remove the display).
 
-#### Fanless Computer from China
+#### ~~Fanless Computer from China~~ Framework
 
-The master node is a cheap fanless computer. I decided to go with a new
-fanless computer for the master node to increase reliability a bit more.
-It is also because there were no T410s on new york craigslist when I was
-expanding to my last node. **Don't buy the AWOW Mini PC - AK41. It is
-super unreliable and sucks**.
+~~The master node is a cheap fanless computer. I decided to go with a
+new fanless computer for the master node to increase reliability a bit
+more. It is also because there were no T410s on new york craigslist when
+I was expanding to my last node.~~**Don't buy the AWOW Mini PC - AK41.
+It is super unreliable and sucks**. I switched the master node to a
+[framework](https://frame.work/) and it has been super awesome. It is
+quite powerful and really made me worry less about my cluster. I don't
+deal with shutdowns anymore.
 
 #### Why no raspberry pi
 
@@ -319,7 +324,9 @@ cert-manager. I desperately wanted to use it again. This was one of the
 main reasons for doing TLS termination on the cluster instead of the
 entrance nodes (and also that wildcard certificates are a bit insecure).
 I integrated cert-manager with Traefik and it works quite well. I love
-being able to spin up a cert easily and have ssl easily enabled.
+being able to spin up a cert easily and have ssl easily enabled. You can
+also use dns validation and keep your domains pointed to the Tailscale
+IPs.
 
 # Storage
 
@@ -369,10 +376,11 @@ node that has a public IP. I think that this is a little better cost
 wise, and means I am fully not dependent on AWS. I will need a public IP
 for this to work however.
 
-## Add two more nodes
+## ~~Add two more nodes~~
 
-I quickly reach the maximum limits of this cluster, and I think that it
-would be prudent to start planning for the addition of two more nodes
+~~I quickly reach the maximum limits of this cluster, and I think that
+it would be prudent to start planning for the addition of two more
+nodes~~
 
 ## Better Storage
 

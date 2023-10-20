@@ -58,14 +58,15 @@ There are configs in \href{https://github.com/sachiniyer/k3s-configs}{another re
 \end{enumerate}
 
 \section{Hardware}
-There are two thinkpads and one fanless computer in my 3 node k3s cluster. I also have an ec2 instance that acts as my ``entrance node'' and also \hyperref[sec:Headscale]{headscale control server}. I don't include this in the cluster, because I want an odd number of nodes.
+There are two thinkpads and \sout{one fanless computer} a framework in my 3 node k3s cluster. I also have an ec2 instance that acts as my ``entrance node'' and also \hyperref[sec:Headscale]{headscale control server}. I don't include this in the cluster, because I want an odd number of nodes. In addition, it does not have much capacity.
 \subsection{Compute}
-I have a very powerful 12 virtualized cores in this cluster. It may not seem like much, but I paid \$250 in total.
+I have a very powerful 16 virtualized cores in this cluster. It may not seem like much, but I paid \$600 in total (a lot of this comes from the framework).
 \paragraph{Thinkpads}
-The cheapest way to get cores is to buy used thinkpads (to which I am preferential anyway). The two secondary nodes are a thinkpad T410 and a thinkpad T420. These thinkpads have been semi-reliable for the last year during the formation of this cluster. You can also look into removing the Intel ME as well as installing coreboot if you have a computer that is old enough (the T410s are). The computer will also boot if you short two of the pins in the eDP ribbon connector (which means you can remove the display).
+The cheapest way to get cores is to buy used thinkpads (to which I am preferential anyway). The four secondary nodes are a thinkpad T410, thinkpad T420 thinkpad T440, and thinkpad x220T. These thinkpads have been semi-reliable for the last year during the formation of this cluster. You can also look into removing the Intel ME as well as installing coreboot if you have a computer that is old enough (the T410s are). The computer will also boot if you short two of the pins in the eDP ribbon connector (which means you can remove the display).
 
-\paragraph{Fanless Computer from China}
-The master node is a cheap fanless computer. I decided to go with a new fanless computer for the master node to increase reliability a bit more. It is also because there were no T410s on new york craigslist when I was expanding to my last node. \textbf{Don't buy the AWOW Mini PC - AK41. It is super unreliable and sucks}.
+\paragraph{\sout{Fanless Computer from China} Framework}
+\sout{The master node is a cheap fanless computer. I decided to go with a new fanless computer for the master node to increase reliability a bit more. It is also because there were no T410s on new york craigslist when I was expanding to my last node.}\textbf{Don't buy the AWOW Mini PC - AK41. It is super unreliable and sucks}.
+I switched the master node to a \href{https://frame.work/}{framework} and it has been super awesome. It is quite powerful and really made me worry less about my cluster. I don't deal with shutdowns anymore.
 
 \paragraph{Why no raspberry pi}
 I did not use raspberry pis because a lot of my applications do not play nice with arm, and they are extremely expensive right now. In the previous iteration of this cluster I ran a multiarch setup with x86 and arm, and I ended up running into a lot of weird problems. I decided to avoid the headache and just stick to x86.
@@ -124,7 +125,7 @@ Load balancing is very cool. All load balancing communication happens through Ta
 I made a similar switch from Nginx to Traefik for the same proxy\_protocol reasoning. the Nginx ingress was not respecting my proxy\_protocol packets, and somehow the Traefik ingress was really easy to configure and get working. I also started to like Traefik a lot more because it seems to play better with the more modern versions of kubernetes ($\ge$ 1.25).
 
 \subsection{Cert Manager}
-In the previous iteration of this cluster, I fell in love with cert-manager. I desperately wanted to use it again. This was one of the main reasons for doing TLS termination on the cluster instead of the entrance nodes (and also that wildcard certificates are a bit insecure). I integrated cert-manager with Traefik and it works quite well. I love being able to spin up a cert easily and have ssl easily enabled.
+In the previous iteration of this cluster, I fell in love with cert-manager. I desperately wanted to use it again. This was one of the main reasons for doing TLS termination on the cluster instead of the entrance nodes (and also that wildcard certificates are a bit insecure). I integrated cert-manager with Traefik and it works quite well. I love being able to spin up a cert easily and have ssl easily enabled. You can also use dns validation and keep your domains pointed to the Tailscale IPs.
 
 \section{Storage}
 I don't do anything to crazy here. The most important thing is being able to do good backups to the cluster.
@@ -149,8 +150,8 @@ I want to integrate autoscaling with ec2 instances for when I am really out of c
 \subsection{Move entrance node}
 I want to move the entrance node off of the ec2 instance into another node that has a public IP. I think that this is a little better cost wise, and means I am fully not dependent on AWS. I will need a public IP for this to work however.
 
-\subsection{Add two more nodes}
-I quickly reach the maximum limits of this cluster, and I think that it would be prudent to start planning for the addition of two more nodes
+\subsection{\sout{Add two more nodes}}
+\sout{I quickly reach the maximum limits of this cluster, and I think that it would be prudent to start planning for the addition of two more nodes}
 
 \subsection{Better Storage}
 \sout{I think it will be nice to add some better storage to this system. The current storage capabilities are alright, but }it would be nice to do intermittent backups to the cloud as well as potentially add even more capacity. \sout{SSDs do not cost much these days.}
