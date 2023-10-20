@@ -137,8 +137,8 @@ I didn't choose the rancher suggested longhorn, because ceph is a bit more resil
 
 
 \section{Future Goals}
-\subsection{move master node}
-The machine that the master node is on right now became unstable, so I need to figure out a way to migrate that over to something more stable.
+\subsection{\sout{move master node}}
+\sout{The machine that the master node is on right now became unstable, so I need to figure out a way to migrate that over to something more stable.}
 
 \subsection{more reliable Headscale}
 Currently Headscale is deployed on bare metal which is okayish. However, I would much rather it be deployed in a docker container, or spun up with docker-compose or something with a bit more fault tolerance.
@@ -153,7 +153,7 @@ I want to move the entrance node off of the ec2 instance into another node that 
 I quickly reach the maximum limits of this cluster, and I think that it would be prudent to start planning for the addition of two more nodes
 
 \subsection{Better Storage}
-I think it will be nice to add some better storage to this system. The current storage capabilities are alright, but it would be nice to do intermittent backups to the cloud as well as potentially add even more capacity. SSDs do not cost much these days.
+\sout{I think it will be nice to add some better storage to this system. The current storage capabilities are alright, but }it would be nice to do intermittent backups to the cloud as well as potentially add even more capacity. \sout{SSDs do not cost much these days.}
 
 \subsection{Integrate Wireguard Key Management into k3s}
 \sout{Lastly, the by far most ambitious improvement would be to move the headscale control server functionality into k3s and handle it natively. This would require a lot more work and system design, but I think it could be interesting to actually make wireguard tunnels through k3s native system design. I will have to think a lot more about this though.} - \emph{UPDATE} seems to be \href{https://www.netmaker.org/blog/deploy-distributed-kubernetes-clusters-with-wireguard-and-netmaker}{done} by someone already.

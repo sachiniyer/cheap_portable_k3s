@@ -1,7 +1,7 @@
 ---
 author:
 - Sachin Iyer
-date: 2023-07-20
+date: 2023-10-19
 title: Cheap Portable k3s
 ---
 
@@ -341,10 +341,11 @@ do that effectively.
 
 # Future Goals
 
-## move master node
+## ~~move master node~~
 
-The machine that the master node is on right now became unstable, so I
-need to figure out a way to migrate that over to something more stable.
+~~The machine that the master node is on right now became unstable, so I
+need to figure out a way to migrate that over to something more
+stable.~~
 
 ## more reliable Headscale
 
@@ -375,10 +376,10 @@ would be prudent to start planning for the addition of two more nodes
 
 ## Better Storage
 
-I think it will be nice to add some better storage to this system. The
-current storage capabilities are alright, but it would be nice to do
+~~I think it will be nice to add some better storage to this system. The
+current storage capabilities are alright, but~~ it would be nice to do
 intermittent backups to the cloud as well as potentially add even more
-capacity. SSDs do not cost much these days.
+capacity. ~~SSDs do not cost much these days.~~
 
 ## Integrate Wireguard Key Management into k3s
 
