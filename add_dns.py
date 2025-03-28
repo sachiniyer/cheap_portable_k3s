@@ -14,13 +14,13 @@ import os
 
 dotenv.load_dotenv()
 
-public_ip = os.environ['PUBLIC_IP']
-private_ip = os.environ['PRIVATE_IP']
-hosted_zone = os.environ['HOSTED_ZONE']
-client = boto3.client('route53')
+public_ip = os.environ["PUBLIC_IP"]
+private_ip = os.environ["PRIVATE_IP"]
+hosted_zone = os.environ["HOSTED_ZONE"]
+client = boto3.client("route53")
 dry_run = False
-wildcard_domain = '\\052.sachiniyer.com.'
-exception_domains = ['api.sachiniyer.com.', wildcard_domain]
+wildcard_domain = "\\052.sachiniyer.com."
+exception_domains = ["api.sachiniyer.com.", wildcard_domain]
 
 
 def get_domains():
@@ -31,17 +31,17 @@ def get_domains():
         domains: list of domains from nginx.conf
         exception_domains: list of domains to not delete
     """
-    with open('nginx.conf', 'r') as f:
+    with open("nginx.conf", "r") as f:
         nginx_conf = f.readlines()
 
     domains = []
     reading = False
     for line in nginx_conf:
-        if 'map $ssl_preread_server_name' in line:
+        if "map $ssl_preread_server_name" in line:
             reading = True
             continue
         if reading:
-            if '}' in line:
+            if "}" in line:
                 break
             domains.append(line.split()[0])
 
@@ -57,34 +57,37 @@ def delete_records(records):
         route53domains: list of domains in Route53 already
     """
     route53domains = []
-    for record in records['ResourceRecordSets']:
-        if (record['Name'] not in keep_domains and record['Type'] == 'A'):
+    for record in records["ResourceRecordSets"]:
+        # TODO: Check whether the record value is also correct
+        if record["Name"] not in keep_domains and record["Type"] == "A":
             print(f"Deleting {record['Name']}")
             if not dry_run:
                 _ = client.change_resource_record_sets(
                     HostedZoneId=hosted_zone,
                     ChangeBatch={
-                        'Comment': 'string',
-                        'Changes': [
+                        "Comment": "string",
+                        "Changes": [
                             {
-                                'Action': 'DELETE',
-                                'ResourceRecordSet': {
-                                    'Name': record['Name'],
-                                    'Type': record['Type'],
-                                    'TTL': record['TTL'],
-                                    'ResourceRecords': [
+                                "Action": "DELETE",
+                                "ResourceRecordSet": {
+                                    "Name": record["Name"],
+                                    "Type": record["Type"],
+                                    "TTL": record["TTL"],
+                                    "ResourceRecords": [
                                         {
-                                            'Value': record['ResourceRecords'][0]['Value']  # noqa E501
+                                            "Value": record["ResourceRecords"][0][
+                                                "Value"
+                                            ]  # noqa E501
                                         },
-                                    ]
-                                }
+                                    ],
+                                },
                             },
-                        ]
-                    }
+                        ],
+                    },
                 )
 
-        elif record['Type'] == 'A':
-            route53domains.append(record['Name'])
+        elif record["Type"] == "A":
+            route53domains.append(record["Name"])
     return route53domains
 
 
@@ -101,23 +104,21 @@ def add_records(add_domains):
             _ = client.change_resource_record_sets(
                 HostedZoneId=hosted_zone,
                 ChangeBatch={
-                    'Comment': 'string',
-                    'Changes': [
+                    "Comment": "string",
+                    "Changes": [
                         {
-                            'Action': 'CREATE',
-                            'ResourceRecordSet': {
-                                'Name': domain,
-                                'Type': 'A',
-                                'TTL': 300,
-                                'ResourceRecords': [
-                                    {
-                                        'Value': public_ip
-                                    },
-                                ]
-                            }
+                            "Action": "CREATE",
+                            "ResourceRecordSet": {
+                                "Name": domain,
+                                "Type": "A",
+                                "TTL": 300,
+                                "ResourceRecords": [
+                                    {"Value": public_ip},
+                                ],
+                            },
                         },
-                    ]
-                }
+                    ],
+                },
             )
 
 
@@ -129,31 +130,36 @@ def set_wildcard(records):
         records: list of records in Route53
     """
     wildcard_exists = False
-    for record in records['ResourceRecordSets']:
-        if record['Name'] == wildcard_domain:
-            if not (record['Type'] == 'A' and record['ResourceRecords'][0]['Value'] == private_ip): # noqa E501
+    for record in records["ResourceRecordSets"]:
+        if record["Name"] == wildcard_domain:
+            if not (
+                record["Type"] == "A"
+                and record["ResourceRecords"][0]["Value"] == private_ip
+            ):  # noqa E501
                 if not dry_run:
                     print("Wildcard domain does not match private IP")
                     _ = client.change_resource_record_sets(
                         HostedZoneId=hosted_zone,
                         ChangeBatch={
-                            'Comment': 'string',
-                            'Changes': [
+                            "Comment": "string",
+                            "Changes": [
                                 {
-                                    'Action': 'DELETE',
-                                    'ResourceRecordSet': {
-                                        'Name': record['Name'],
-                                        'Type': record['Type'],
-                                        'TTL': record['TTL'],
-                                        'ResourceRecords': [
+                                    "Action": "DELETE",
+                                    "ResourceRecordSet": {
+                                        "Name": record["Name"],
+                                        "Type": record["Type"],
+                                        "TTL": record["TTL"],
+                                        "ResourceRecords": [
                                             {
-                                                'Value': record['ResourceRecords'][0]['Value']  # noqa E501
+                                                "Value": record["ResourceRecords"][0][
+                                                    "Value"
+                                                ]  # noqa E501
                                             },
-                                        ]
-                                    }
+                                        ],
+                                    },
                                 },
-                            ]
-                        }
+                            ],
+                        },
                     )
                 wildcard_exists = False
             else:
@@ -165,23 +171,21 @@ def set_wildcard(records):
             _ = client.change_resource_record_sets(
                 HostedZoneId=hosted_zone,
                 ChangeBatch={
-                    'Comment': 'string',
-                    'Changes': [
+                    "Comment": "string",
+                    "Changes": [
                         {
-                            'Action': 'CREATE',
-                            'ResourceRecordSet': {
-                                'Name': '*.sachiniyer.com.',
-                                'Type': 'A',
-                                'TTL': 300,
-                                'ResourceRecords': [
-                                    {
-                                        'Value': private_ip
-                                    },
-                                ]
-                            }
+                            "Action": "CREATE",
+                            "ResourceRecordSet": {
+                                "Name": "*.sachiniyer.com.",
+                                "Type": "A",
+                                "TTL": 300,
+                                "ResourceRecords": [
+                                    {"Value": private_ip},
+                                ],
+                            },
                         },
-                    ]
-                }
+                    ],
+                },
             )
 
 
